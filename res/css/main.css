@@ -1,0 +1,57 @@
+* {
+    /*border: 1px solid red !important;*/
+    border: 1px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+p.big {
+    margin-top: 10px;
+    line-height: 2;
+}
+
+.grid {
+    margin: 0 auto;
+    /*max-width: 1200px;*/
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.control-btn {
+   height:40px;
+   width:40px;
+   padding: 10px 10px 10px 10px;
+   background-size: cover;
+   overflow:hidden;
+}
+
+.btn-bg {
+    width: 100%;
+    height: auto;
+}
+
+.canvasGame {
+    margin-top: 35px;
+    border: 4px solid #555;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #111;
+}
+
+.canvasDistanceMap {
+    margin-top: 35px;
+    border: 4px solid #FFF;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #EEE;
+}
