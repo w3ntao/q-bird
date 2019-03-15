@@ -1,6 +1,6 @@
 ## Flappy Bird with Q-Learning
 A simple implementation to [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf).\
-Train your bird at [https://wentaozero.github.io/q-bird](https://wentaozero.github.io/q-bird).
+Train your bird at [https://wentaocn.github.io/q-bird](https://wentaocn.github.io/q-bird).
 
 ![score-10000](chart/score-10000.png)
 
