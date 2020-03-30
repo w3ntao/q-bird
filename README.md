@@ -4,7 +4,7 @@ Train your bird at [https://wentaocn.github.io/q-bird](https://wentaocn.github.i
 
 ![score-10000](chart/score-10000.png)
 
-### How it works
+### Pseudocode
 ```
 Q ← {}
 state-seq ← []
@@ -35,7 +35,7 @@ R: reward
     -1000 for death
 ```
 
-### Result: after 1000 rounds' iteration
+### After 1000 Rounds' Iteration
 <img src="chart/chart-0.png" alt="drawing" width="45%"/> <img src="chart/chart-1.png" alt="drawing" width="45%"/>
 
 <img src="chart/chart-2.png" alt="drawing" width="45%"/> <img src="chart/chart-3.png" alt="drawing" width="45%"/>
