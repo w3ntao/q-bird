@@ -19,9 +19,9 @@ for each round:
                 A ← do-nothing
         state-seq ← state-seq + [S, A]
 
-        if terminal:
+        if termination:
             for [S, A] in reversed(state-seq):
-                if S is the 1st (closest to terminal):
+                if S is the 1st (right before termination):
                     Q(S, A) ← (1 - α) * Q(S, A) + α * R
                 else:
                     S' ← next state of S
