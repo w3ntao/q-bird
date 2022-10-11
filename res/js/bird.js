@@ -277,11 +277,13 @@ function animation(gameState) {
     var mode = gameState.mode;
     var curFrame = gameState.curFrame;
 
-    if (mode === "ready" || mode === "playing")
+    if (mode === "ready" || mode === "playing") {
         gameState.birdSprite = Math.floor(curFrame / swingT) % 3;
+    }
 
-    if (mode === "ready")
+    if (mode === "ready") {
         gameState.birdY = birdStartY + sineWaveA * Math.sin(curFrame * Math.PI * 2 / sineWaveT);
+    }
 
     if (mode === "dead") {
         gameState.deadFlash += 1;
@@ -301,8 +303,8 @@ function updateBird(gameState) {
         var newY = Math.max(newY, -birdHeight);
         gameState.birdY = newY;
         gameState.birdVel = curVel;
-
     }
+
     return animation(gameState);
 }
 
@@ -367,12 +369,12 @@ function updateScoreBoard(gameState) {
     var arrLen = gameState.scoreRecord.length;
     var scoreRecord = gameState.scoreRecord.slice(arrLen - avgSampleRange, arrLen);
 
-    var tempSum = scoreRecord.reduce(function(a, b) { return a + b; }, 0);
+    var tempSum = scoreRecord.reduce(function (a, b) { return a + b; }, 0);
     scoreChart.series[1].addPoint([round, tempSum / avgSampleRange]);
 }
 
 function updateQL(gameState) {
-    if (gameState.mode === "ready") { return gameState;}
+    if (gameState.mode === "ready") { return gameState; }
 
     if (!updateQL.Q) {
         updateQL.Q = {};
@@ -417,7 +419,7 @@ function updateQL(gameState) {
 
         for (var i = gameState.stateSeq.length - 2; i >= 0; i--) {
             var [vS, vA] = gameState.stateSeq[i];
-            var [nextS, _] = gameState.stateSeq[i+1];
+            var [nextS, _] = gameState.stateSeq[i + 1];
 
             if (flapPenalty && vA === 1) {
                 Q[vS][vA] = (1 - qlAlpha) * Q[vS][vA] + qlAlpha * qlDeadReward;
@@ -565,7 +567,7 @@ function renderDistantMap(gameState) {
         renderDistantMap.image = new Image();
         renderDistantMap.sprites = {};
         renderDistantMap.resourcesLoaded = false;
-        renderDistantMap.ctx.font="20px Georgia";
+        renderDistantMap.ctx.font = "20px Georgia";
 
         renderDistantMap.image.addEventListener("load", function () {
             $.get(csvSrc, function (result) {
@@ -593,7 +595,7 @@ function renderDistantMap(gameState) {
     ctx.fillRect(0, 0, renderDistantMap.cvs.width, renderDistantMap.cvs.height);
 
     if (gameState.pipeList.length > 0) {
-        gameState.pipeList.forEach(function(pipe, index) {
+        gameState.pipeList.forEach(function (pipe, index) {
             if (pipe.curX > renderDistantMap.cvs.width) { return; }
 
             var colorDepth = 1;
@@ -609,11 +611,11 @@ function renderDistantMap(gameState) {
 
             ctx.fillStyle = "rgba(119, 152, 191, " + colorDepth + ")";
             ctx.fillRect(pipe.curX, pipe.gapTop,
-                         pipeWidth, pipeGap);
+                pipeWidth, pipeGap);
         });
 
         var firstPipe = getFirstPipe(gameState.pipeList);
-        var [adjustedBirdX, adjustedBirdY] = [birdX + birdWidth, gameState.birdY + 0.3*birdHeight];
+        var [adjustedBirdX, adjustedBirdY] = [birdX + birdWidth, gameState.birdY + 0.3 * birdHeight];
 
         if (adjustedBirdX < firstPipe.curX) {
             ctx.setLineDash([5, 3]);
@@ -633,8 +635,8 @@ function renderDistantMap(gameState) {
 
             ctx.fillStyle = ctx.strokeStyle;
             ctx.fillText('dx',
-                         (adjustedBirdX + firstPipe.curX) / 2,
-                         adjustedBirdY + 20);
+                (adjustedBirdX + firstPipe.curX) / 2,
+                adjustedBirdY + 20);
 
             ctx.stroke();
 
@@ -644,8 +646,8 @@ function renderDistantMap(gameState) {
             ctx.lineTo(firstPipe.curX, firstPipe.gapTop + pipeGap);
             ctx.fillStyle = ctx.strokeStyle;
             ctx.fillText('dy',
-                         firstPipe.curX + 5,
-                         (adjustedBirdY + firstPipe.gapTop + pipeGap) / 2);
+                firstPipe.curX + 5,
+                (adjustedBirdY + firstPipe.gapTop + pipeGap) / 2);
 
             ctx.stroke();
         }
@@ -660,7 +662,7 @@ function renderDistantMap(gameState) {
 var gameState = startingState();
 
 window.addEventListener("keydown", function (e) {
-    if(e.keyCode != 32){ return; }
+    if (e.keyCode != 32) { return; }
     e.preventDefault();
 
     if (gameState.mode === "ready") {
@@ -782,7 +784,6 @@ var scoreChart = Highcharts.chart('scoreChart', {
                 radius: 1.5,
             },
         },
-
         {
             name: "avg (last " + avgSampleRange + " rounds)",
             color: 'rgba(223, 83, 83, 0.8)',
