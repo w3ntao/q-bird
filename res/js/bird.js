@@ -42,8 +42,6 @@ var qlGamma = 0.8;
 var qlDownSampling = 10;
 var qlAliveReward = 1;
 var qlDeadReward = -1000;
-var qlEpsilon = 0;
-var qlExploreFlapRate = 0.1;
 
 var avgSampleRange = 20;
 
@@ -136,7 +134,6 @@ function resetState(gameState) {
     var curFrame = gameState.curFrame;
     var totalScore = gameState.totalScore;
     var maxScore = gameState.maxScore;
-    var score = gameState.score;
     var scoreRecord = gameState.scoreRecord;
 
     var gameState = startingState();
