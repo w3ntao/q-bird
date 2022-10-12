@@ -469,22 +469,23 @@ function renderMainCanvas(gameState) {
         renderMainCanvas.image = new Image();
         renderMainCanvas.sprites = {};
         renderMainCanvas.resourcesLoaded = false;
-
         renderMainCanvas.ctx.font = renderMainCanvas.ctx.font.replace(/\d+px/, "14px");
 
         renderMainCanvas.image.addEventListener("load", function () {
-            $.get(csvSrc, function (result) {
-                result.split('\n').forEach(function (line) {
-                    let values = line.split(' ');
-                    renderMainCanvas.sprites[values[0]] = [
-                        Math.round(parseInt(values[1], 10)),
-                        Math.round(parseInt(values[2], 10)),
-                        Math.round(parseFloat(values[3]) * renderMainCanvas.image.width),
-                        Math.round(parseFloat(values[4]) * renderMainCanvas.image.height)
-                    ];
+            fetch(csvSrc)
+                .then(response => response.text())
+                .then(csvData => {
+                    csvData.split('\n').forEach(function (line) {
+                        let values = line.split(' ');
+                        renderMainCanvas.sprites[values[0]] = [
+                            Math.round(parseInt(values[1], 10)),
+                            Math.round(parseInt(values[2], 10)),
+                            Math.round(parseFloat(values[3]) * renderMainCanvas.image.width),
+                            Math.round(parseFloat(values[4]) * renderMainCanvas.image.height)
+                        ];
+                    });
+                    renderMainCanvas.resourcesLoaded = true;
                 });
-                renderMainCanvas.resourcesLoaded = true;
-            });
         });
         renderMainCanvas.image.src = atlasSrc;
     }
@@ -570,18 +571,20 @@ function renderDistantMap(gameState) {
         renderDistantMap.ctx.font = "20px Georgia";
 
         renderDistantMap.image.addEventListener("load", function () {
-            $.get(csvSrc, function (result) {
-                result.split('\n').forEach(function (line) {
-                    let values = line.split(' ');
-                    renderDistantMap.sprites[values[0]] = [
-                        Math.round(parseInt(values[1], 10)),
-                        Math.round(parseInt(values[2], 10)),
-                        Math.round(parseFloat(values[3]) * renderDistantMap.image.width),
-                        Math.round(parseFloat(values[4]) * renderDistantMap.image.height)
-                    ];
+            fetch(csvSrc)
+                .then(response => response.text())
+                .then(csvData => {
+                    csvData.split('\n').forEach(function (line) {
+                        let values = line.split(' ');
+                        renderDistantMap.sprites[values[0]] = [
+                            Math.round(parseInt(values[1], 10)),
+                            Math.round(parseInt(values[2], 10)),
+                            Math.round(parseFloat(values[3]) * renderDistantMap.image.width),
+                            Math.round(parseFloat(values[4]) * renderDistantMap.image.height)
+                        ];
+                    });
+                    renderDistantMap.resourcesLoaded = true;
                 });
-                renderDistantMap.resourcesLoaded = true;
-            });
         });
         renderDistantMap.image.src = atlasSrc;
     }
